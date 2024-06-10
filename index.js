@@ -1,37 +1,33 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const PORT = 3000;
 
-app.get('/', (req, res) => {
-  res.send("Go to /number for instructions")
+app.get("/", (req, res) => {
+  res.send("Go to /number for instructions");
 });
 
-app.get('/number', (req, res) => {
-  res.send("Go to /number/:num to check if :num is/isn’t a palindrome")
+app.get("/number", (req, res) => {
+  res.send("Go to /number/:num to check if :num is/isn’t a palindrome");
 });
 
 function palindromeChecker(num) {
   let mod = num.toString();
-  let modLite = mod.split('').reverse().join('');
-  if(mod === modLite){
+  if (mod === mod.split("").reverse().join("")) {
     return true;
   } else {
     return false;
   }
 }
 
-app.get('/number/:num', (req, res) => {
+app.get("/number/:num", (req, res) => {
   const num = req.params.num;
-  if(num < 0) {
+  if (num < 0) {
     res.send("The number is negative");
-  }
-  else if(palindromeChecker(num) === false){
+  } else if (palindromeChecker(num) === false) {
     res.send(`${num} isn't a palindrome`);
-  }
-
-  else if (palindromeChecker(num) === true) {
+  } else if (palindromeChecker(num) === true) {
     res.send(`${num} is a palindrome`);
-  } 
+  }
 });
 
 app.listen(PORT, () => {
